@@ -40,19 +40,19 @@ class Article
      *
      * @ORM\Column(name="body", type="text", nullable=true)
      */
-    private $body;
+    protected $body;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="createdAt", type="datetime", nullable=true)
-     */
-    protected $createdAt;
+    ///**
+     //* @var \Date
+     //*
+     //* @ORM\Column(name="createdAt", type="date", nullable=true)
+     //*/
+    //protected $createdAt;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="slug", type="string", length=255)
+     * @ORM\Column(name="slug", type="string", length=255, unique=true)
      */
     protected $slug;
 
@@ -64,22 +64,12 @@ class Article
     protected $createdBy;
 
 
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * Set titre
-     *
-     * @param string $titre
-     * @return Article
-     */
+    
     public function setTitre($titre)
     {
         $this->titre = $titre;
@@ -87,22 +77,11 @@ class Article
         return $this;
     }
 
-    /**
-     * Get titre
-     *
-     * @return string 
-     */
     public function getTitre()
     {
         return $this->titre;
     }
 
-    /**
-     * Set leadings
-     *
-     * @param string $leadings
-     * @return Article
-     */
     public function setLeadings($leadings)
     {
         $this->leadings = $leadings;
@@ -110,11 +89,6 @@ class Article
         return $this;
     }
 
-    /**
-     * Get leadings
-     *
-     * @return string 
-     */
     public function getLeadings()
     {
         return $this->leadings;
@@ -133,22 +107,11 @@ class Article
         return $this;
     }
 
-    /**
-     * Get body
-     *
-     * @return string 
-     */
     public function getBody()
     {
         return $this->body;
     }
-
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     * @return Article
-     */
+/*
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
@@ -156,22 +119,11 @@ class Article
         return $this;
     }
 
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime 
-     */
     public function getCreatedAt()
     {
         return $this->createdAt;
     }
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return Article
-     */
+*/
     public function setSlug($slug)
     {
         $this->slug = $slug;
@@ -179,22 +131,12 @@ class Article
         return $this;
     }
 
-    /**
-     * Get slug
-     *
-     * @return string 
-     */
+
     public function getSlug()
     {
         return $this->slug;
     }
 
-    /**
-     * Set createdBy
-     *
-     * @param string $createdBy
-     * @return Article
-     */
     public function setCreatedBy($createdBy)
     {
         $this->createdBy = $createdBy;
@@ -202,11 +144,6 @@ class Article
         return $this;
     }
 
-    /**
-     * Get createdBy
-     *
-     * @return string 
-     */
     public function getCreatedBy()
     {
         return $this->createdBy;

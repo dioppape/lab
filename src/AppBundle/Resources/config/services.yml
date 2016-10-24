@@ -1,5 +1,5 @@
 services:
-    acme_demo.form.type.task:
+    app_bundle.form.type.article:
         class: src\AppBundle\Form\Type\TaskType
         tags:
             - { titre: form.type, alias: task },

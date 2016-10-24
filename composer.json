@@ -19,7 +19,11 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "friendsofsymfony/rest-bundle": "@stable",
         "jms/serializer-bundle": "@stable",
-        "nelmio/api-doc-bundle": "^2.13"
+        "nelmio/api-doc-bundle": "^2.13",
+        "twbs/bootstrap": "^3.3",
+        "components/jquery": "^3.1",
+        "components/font-awesome": "^4.6",
+        "symfony/assetic-bundle": "^2.8"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",

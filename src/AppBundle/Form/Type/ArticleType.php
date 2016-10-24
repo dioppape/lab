@@ -5,15 +5,15 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PlaceType extends AbstractType
+class ArticleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title');
+        $builder->add('titre');
         $builder->add('leadings');
         $builder->add('body');
+        //$builder->add('createdAt');
         $builder->add('slug');
-        $builder->add('createdAt');
         $builder->add('createdBy');
     }
 
