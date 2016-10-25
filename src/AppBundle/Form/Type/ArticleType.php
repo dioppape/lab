@@ -24,4 +24,6 @@ class ArticleType extends AbstractType
             'csrf_protection' => false //API CRS_PROTECTION à FALSE
         ]);
     }
+
+
 }

@@ -15,17 +15,57 @@ class RestClientController extends Controller
      */
     public function editerAction(Request $request)
     {
-        /* make curl request */ 
+        /*
+         {
+  "id": 1,
+  "titre": "test",
+  "leadings": "1",
+  "body": "blbla",
+  "created_at": "2016-10-25T23:48:17+0200",
+  "slug": "125",
+  "created_by": "12-12-2000"
+}
+         */
+        /* make curl request
         $ch = curl_init();
         $id_article = $request->get('id');
         curl_setopt($ch, CURLOPT_URL, 'http://localhost/lab5RestApi/web/app_dev.php/api/articles/'.$id_article);
         curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/json')); 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         $response = curl_exec($ch);
-        $data = json_decode($response);
+        $data = json_decode($response);*/
+        $postData = '';
+        //create name value pairs seperated by &
+        $params = array(
+            "titre" => "Ravishanker Kusuma",
+            "leadings" => "1",
+            "body" => "test lab",
+            "slug" => "152",
+            "createdBy" => "02-01-2016"
+        );
+        $url = $this->getUrl();
+        foreach($params as $k => $v)
+        {
+            $postData .= $k . '='.$v.'&';
+        }
+        $postData = rtrim($postData, '&');
+
+        $ch = curl_init();
+
+        curl_setopt($ch,CURLOPT_URL,$url);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+        curl_setopt($ch,CURLOPT_HEADER, false);
+        curl_setopt($ch, CURLOPT_POST, count($postData));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+
+        $output=curl_exec($ch);
+
+        curl_close($ch);
+        dump($output);die;
+
         
         return $this->render('RestClientBundle:article:suppArticle.html.twig', array(
-            'articles' => $data,
+            'articles' => $output,
         ));
     }
     
@@ -46,73 +86,39 @@ class RestClientController extends Controller
             'articles' => $data,
         ));
     }
-    
+
     /**
      * @Route("/creer", name="add_article")
      */
     public function creerArticlesAction(Request $request)
     {
         if ($request->isMethod('Post')) {
-            
-            $api_request_url = 'http://localhost/lab5RestApi/web/app_dev.php/api/articles';
-            
-            $api_request_parameters = array(
+
+            $url = $this->getUrl();//'http://localhost/lab5RestApi/web/app_dev.php/api/articles';
+            $postData = '';
+            $params = array(
                 'titre' => $request->get('titre'),
                 'leadings' => $request->get('titre'),
-                'body'   => $request->get('body'),
+                'body' => $request->get('body'),
                 'slug' => $request->get('slug'),
-                'created_by' => $request->get('auteur')
+                'createdBy' => $request->get('auteur')
             );
+            foreach ($params as $k => $v) {
+                $postData .= $k . '=' . $v . '&';
+            }
+            $postData = rtrim($postData, '&');
+
             $ch = curl_init();
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-            /*
-            if ($method_name == 'DELETE')
-            {
-              curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
-              curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($api_request_parameters));
-            }*/
 
-            
-            curl_setopt($ch, CURLOPT_POST, TRUE);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($api_request_parameters));
-            
-            /*
-            if ($method_name == 'PUT')
-            {
-              curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
-              curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($api_request_parameters));
-            */
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HEADER, false);
+            curl_setopt($ch, CURLOPT_POST, count($postData));
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
 
-            /*
-              Here you can set the Response Content Type you prefer to get :
-              application/json, application/xml, text/html, text/plain, etc
-            */
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json'));
+            $output = curl_exec($ch);
 
-            /*
-              Let's give the Request Url to Curl
-            */
-            curl_setopt($ch, CURLOPT_URL, $api_request_url);
-
-            /*
-              Yes we want to get the Response Header
-              (it will be mixed with the response body but we'll separate that after)
-            */
-            curl_setopt($ch, CURLOPT_HEADER, TRUE);
-            /*
-              Allows Curl to connect to an API server through HTTPS
-            */
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
- 
-            $api_response = curl_exec($ch);
-            $api_response_info = curl_getinfo($ch);
             curl_close($ch);
-
-            //$api_response_header = trim(substr($api_response, 0, $api_response_info['header_size']));
-            $api_response_body = substr($api_response, $api_response_info['header_size']);
-
-            //echo $api_response_info['http_code'];
-            echo $api_response_body;
             /*
             //trying with ci/restclientbundle
             $restClient = $this->container->get('circle.restclient');
@@ -124,11 +130,14 @@ class RestClientController extends Controller
                     'created_by' => $request->get('auteur')
                 );
             $restClient->post('http://localhost/lab5RestApi/web/app_dev.php/api/articles', $opts);*/
-             
+
+
+            return $this->render('RestClientBundle:article:ajouterArticle.html.twig', json_decode($output, true));
         }
-        
-        return $this->render('RestClientBundle:article:ajouterArticle.html.twig', array(
-      
-        ));
+        return $this->render('RestClientBundle:article:ajouterArticle.html.twig', ['status' => 401]);
+    }
+
+    public function getUrl() {
+        return "http://localhost/lab5RestApi/web/app_dev.php/api/articles";//http://lab.dev/app_dev.php/api/articles";
     }
 }

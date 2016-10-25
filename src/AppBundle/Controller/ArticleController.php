@@ -57,7 +57,7 @@ class ArticleController extends Controller
         $form = $this->createForm(ArticleType::class, $article);
         $form -> submit($request->request->All());
         
-        if ($form->isValid() && $request->isMethod('Post')) {
+        if ($request->isMethod('Post')) {
             $em = $this->get('doctrine.orm.entity_manager');
             $article->setCreatedAt(new \Datetime());
             $em->persist($article);
