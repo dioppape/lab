@@ -42,12 +42,12 @@ class Article
      */
     protected $body;
 
-    ///**
-     //* @var \Date
-     //*
-     //* @ORM\Column(name="createdAt", type="date", nullable=true)
-     //*/
-    //protected $createdAt;
+    /**
+     * @var \Datetime
+     *
+     * @ORM\Column(name="createdAt", type="datetime", nullable=true)
+     */
+    protected $createdAt;
 
     /**
      * @var string
@@ -111,7 +111,7 @@ class Article
     {
         return $this->body;
     }
-/*
+    
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
@@ -123,7 +123,7 @@ class Article
     {
         return $this->createdAt;
     }
-*/
+    
     public function setSlug($slug)
     {
         $this->slug = $slug;

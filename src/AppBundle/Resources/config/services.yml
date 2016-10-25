@@ -1,10 +1,10 @@
 services:
     app_bundle.form.type.article:
-        class: src\AppBundle\Form\Type\TaskType
+        class: src\AppBundle\Form\Type\ArticleType
         tags:
-            - { titre: form.type, alias: task },
-            - { leadings: form.type, alias: task },
-            - { body: form.type, alias: task },
-            - { slug: form.type, alias: task },
-            - { createdAt: form.type, alias: task },
-            - { createdBy: form.type, alias: task }
+            - { titre: form.type, alias: task},
+            - { leadings: form.type, alias: task},
+            - { body: form.type, alias: task},
+            - { slug: form.type, alias: task},
+            - { createdAt: form.type, alias: task},
+            - { createdBy: form.type, alias: task}

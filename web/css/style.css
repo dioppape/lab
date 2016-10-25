@@ -1,0 +1,31 @@
+.articleitem{
+    max-width: 600px;
+    border: solid;
+    background-color: aqua;
+    margin-bottom: 5px;
+}
+.form-control{
+   width: 50%; 
+}
+
+.span_button_add{
+    float: right;
+}
+
+.head_add{
+    white-space: nowrap;
+    max-width: 600px;
+    margin-bottom: 5px;
+}
+.div_list_article, .div_one_article{
+    max-width: 600px;
+    border-bottom: solid;
+    background-color: beige;
+    margin-bottom: 5px;
+}
+.div_one_article {
+    margin-top: 15px;
+}
+.button_create{
+    margin-bottom: 5px;
+}

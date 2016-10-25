@@ -65,13 +65,59 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+  
+#circle_rest_client_bundle
+circle_rest_client:
+    curl:
+      defaults:
+        CURLOPT_HTTPHEADER:     [ 'Content-Type: application/json' ]
+        CURLOPT_FOLLOWLOCATION: true
+# Assetic configuration
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: false
+    bundles: ['RestClientBundle']
+    filters:
+        cssrewrite: ~
+    assets:
+        bootstrap_js:
+            inputs:
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/transition.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/alert.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/button.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/carousel.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/collapse.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/dropdown.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/modal.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/tooltip.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/popover.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/scrollspy.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/tab.js
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/js/affix.js
+            output: js/compiled/bootstrap.js
+        bootstrap_css:
+            inputs:
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.css
+                - %kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap-theme.css
+            filters: [cssrewrite]
+            output: css/compiled/bootstrap.css
 
+        fa_css:
+            inputs:
+                - %kernel.root_dir%/../vendor/components/font-awesome/css/font-awesome.min.css
+            output: css/compiled/fa.css
+
+        jquery:
+            inputs:
+                - %kernel.root_dir%/../vendor/components/jquery/jquery.min.js
+            output: js/compiled/jquery.js
 
 fos_rest:
     routing_loader:
         include_format: false
     view:
         view_response_listener: true
+    
     format_listener:
         rules:
             - { path: '^/api', priorities: ['json'], fallback_format: 'json' }

@@ -23,7 +23,9 @@
         "twbs/bootstrap": "^3.3",
         "components/jquery": "^3.1",
         "components/font-awesome": "^4.6",
-        "symfony/assetic-bundle": "^2.8"
+        "symfony/assetic-bundle": "^2.8",
+        "sensio/buzz-bundle": "dev-master",
+        "ci/restclientbundle": "^2.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~3.0",

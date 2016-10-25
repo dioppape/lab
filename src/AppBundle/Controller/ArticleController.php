@@ -51,13 +51,15 @@ class ArticleController extends Controller
      */
     public function postArticleAction(Request $request) {
         $article = new Article();
-        /* call later by service */
-        //$form = $this->createForm('app_bundle.form.type.article', $article); 
+        /* call later by service 
+        $form = $this->createForm('task', $article); 
+        */
         $form = $this->createForm(ArticleType::class, $article);
         $form -> submit($request->request->All());
         
         if ($form->isValid() && $request->isMethod('Post')) {
             $em = $this->get('doctrine.orm.entity_manager');
+            $article->setCreatedAt(new \Datetime());
             $em->persist($article);
             $em->flush();
             return $article;
@@ -76,7 +78,7 @@ class ArticleController extends Controller
         $article = $em->getRepository('AppBundle:Article')
                     ->find($request->get('id'));
         /* @var $place Place */
-        
+    
         if (!$article) {
            return new JsonResponse(['message' => 'This Article is not found'], Response::HTTP_NOT_FOUND);
         }

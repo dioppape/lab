@@ -1,0 +1,35 @@
+{% extends 'RestClientBundle::layout.html.twig' %}
+{% block body %}
+<div class="" align="center">
+    <h1 align="center">Ajouter un Article </h1>
+    
+<form class="form-horizontal articleitem" method="post" action="{{ path('add_article') }}">
+  <div class="form-group">
+    <label class="" for="titre_article">Titre:</label>
+    <input type="text" name = "titre" class="form-control" id="titre_article">
+  </div>
+  <div class="form-group">
+    <label class="" for="pwd">Accroche:</label>
+    <input type="text" name = "leading" class="form-control" id="pwd">
+  </div>
+  <div class="form-group">
+    <label class="" for="corps">Corps:</label>
+    <textarea id="txtArea"  name = "body" rows="5" cols="60" id="corps"></textarea>
+  </div>
+  <div class="form-group">
+      <label class="" for="pwd">Slug:</label>
+      <input type="text" name = "slug" class="form-control" id="slug">
+  </div>
+  <div class="form-group">
+    <label class="" for="author">Auteur:</label>
+    <input type="text" name = "auteur" class="form-control" id="author">
+  </div>
+  <div class="form-inline button_create">
+    <a href="{{ path('all_articles') }}"><button type="button" class="btn btn-primary">Retour à la liste</button>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
+
+ </div>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'RestClientBundle::layout.html.twig' %}
+{% block body %}
+<div align="center">
+    <div class="head_add">
+        <h1 >Liste des Articles </h1>
+        <a href="{{ path('add_article') }}"><button type="button" class="btn btn-primary">Ajouter un Article</button></a>
+    </div>
+</div>
+<div align="center">
+    {% for article in articles %}
+        <div class="div_list_article">
+            <p> {{article.titre |upper }} [ par {{ article.created_by}} le {{ article.created_at|date('m-d-Y')}} ] </p>
+            <p>{{article.body}} </p>
+        </div>
+        
+    {% endfor %}
+
+</div>
+{% endblock %}

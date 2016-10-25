@@ -1,0 +1,21 @@
+{% extends 'RestClientBundle::layout.html.twig' %}
+{% block body %}
+<div class="" align="center">
+
+    <div class="div_one_article">
+        <span> {{articles.titre|upper }}</span> <span>[ par {{ articles.created_by}} le {{ articles.created_at|date('d-m-Y')}} ] </span>
+    </div>
+    <div class="div_one_article">
+        <p>{{articles.leadings}} </p>
+    </div>
+    <div class="div_one_article">
+        <p>{{articles.body}} </p>
+    </div>
+    <div class="form-inline">
+        <a href="{{ path('all_articles') }}"><button type="button" class="btn btn-primary">Retour à la liste</button>
+        <a href="#"><button type="button" class="btn btn-danger">Supprimer</button>
+    </div>
+</div>
+
+{% endblock %}
+

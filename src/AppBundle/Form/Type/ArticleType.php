@@ -12,9 +12,9 @@ class ArticleType extends AbstractType
         $builder->add('titre');
         $builder->add('leadings');
         $builder->add('body');
-        //$builder->add('createdAt');
         $builder->add('slug');
         $builder->add('createdBy');
+        //$builder->add('submit','submit');
     }
 
     public function configureOptions(OptionsResolver $resolver)
